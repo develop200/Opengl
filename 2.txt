@@ -1,0 +1,74 @@
+#include <GL/glew.h>
+#include <GLFW/glfw3.h>
+#include <iostream>
+
+int main(void)
+{
+	GLFWwindow* window;
+
+	/* Initialize the library */
+	if (!glfwInit())
+		return -1;
+
+
+	/* Create a windowed mode window and its OpenGL context */
+	window = glfwCreateWindow(640, 480, "Hello World", NULL, NULL);
+	if (!window)
+	{
+		glfwTerminate();
+		return -1;
+	}
+
+	/* Make the window's context current */
+	glfwMakeContextCurrent(window);
+
+
+	if (glewInit() != GLEW_OK)
+		std::cout << "Error" << std::endl;   /* First you need to create a valid OpenGL
+											 rendering context and call glewInit() to initialize the
+											 extension entry points. 
+											 Now me have access to openGL functions*/
+
+	std::cout << glGetString(GL_VERSION) << std::endl; //write version of OpenGL
+
+	float positions[6] = {
+	-0.5f, -0.5f,
+	0.0f, 0.5f,
+	0.5f, -0.5f
+	};
+
+	unsigned int buffer;
+	glGenBuffers(1, &buffer);   // define vertexbuffer, 1 - how many buffers want, there will be id of a buffer in buffer.
+	glBindBuffer(GL_ARRAY_BUFFER, buffer); // selecting buffer (select the purpose of buffer)
+	//Then we need to put data in buffer (we can do in whenever we want)
+	glBufferData(GL_ARRAY_BUFFER,sizeof(positions), positions, GL_STATIC_DRAW); /*GL_ARRAY_BUFFER - target, second arg -
+														size of buffer (we can 6*sizeof(float))
+														3 -pointer to data which we want to copy
+														4 - usage - define expected usage pattern of the data store
+														(how buffer will be accessed) (STREAM, STATIC , DINAMIC)
+														STATIC - data modified ones, used many times,
+														DINAMIC - modified and used many times
+														Ways of access: DRAW, ...
+													*/
+
+
+	/* Loop until the user closes the window */
+	while (!glfwWindowShouldClose(window))
+	{
+		/* Render here */
+		glClear(GL_COLOR_BUFFER_BIT);
+
+		glDrawArrays(GL_TRIANGLES, 0, 3); // 1- mode (what kind of primitive you want to draw)
+									// 2 - starting index in array
+									// 3 - number of indexes
+							// !!! Draw what we pointed in glBindBuffer
+		/* Swap front and back buffers */
+		glfwSwapBuffers(window);
+
+		/* Poll for and process events */
+		glfwPollEvents();
+	}
+
+	glfwTerminate();
+	return 0;
+}
