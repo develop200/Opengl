@@ -24,12 +24,13 @@ int main(void)
 
 
 	if (glewInit() != GLEW_OK)
-		std::cout << "Error" << std::endl;   /* ÿ íàïèñàë First you need to create a valid OpenGL
-											 rendering context and call glewInit() to initialize the
-											 extension entry points. 
-											 Ñåé÷àñ ó íàñ åñòü äîñòóï äî âñåõ openGL ôóíêöèé*/
+		std::cout << "Error" << std::endl;   /* Ð­Ñ‚Ð¾ Ñ Ð½Ð°Ð¿Ð¸ÑÐ°Ð» 
+							First you need to create a valid OpenGL
+							rendering context and call glewInit() to initialize the
+							extension entry points. 
+							Ð¢ÐµÐ¿ÐµÑ€ÑŒ Ð¼Ð¾Ð¶Ð½Ð¾ Ð¸ÑÐ¿Ð¾Ð»ÑŒÐ·Ð¾Ð²Ð°Ñ‚ÑŒ Ð²ÑÐµ Ñ„ÑƒÐ½ÐºÑ†Ð¸Ð¸ openGL*/
 
-	std::cout << glGetString(GL_VERSION) << std::endl; //âûâåäåò âåðñèþ OpenGL
+	std::cout << glGetString(GL_VERSION) << std::endl; //ÐŸÐ¸ÑˆÐµÑ‚ Ð²ÐµÑ€ÑÐ¸ÑŽ OpenGL
 
 	/* Loop until the user closes the window */
 	while (!glfwWindowShouldClose(window))
